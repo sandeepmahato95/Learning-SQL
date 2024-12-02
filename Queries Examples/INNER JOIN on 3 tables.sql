@@ -1,4 +1,4 @@
-# Joined 3 tables
+# Inner Joined 3 tables in the same database
 
 USE sql_store;
 
