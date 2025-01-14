@@ -1,4 +1,12 @@
--- **UNION** combines rows or results from different Tables and Queries 
+/*
+The **UNION** operator is used to combine the result-set of two or more SELECT statements from same table and multiple tables as well.
+
+Important Notes to remeber:
+1. Every SELECT statement within UNION must have the same number of columns
+2. The columns must also have similar data types
+3. The columns in every SELECT statement must also be in the same order
+4. The UNION operator selects only "distinct" values by default. To allow "duplicate" values, use **UNION ALL**
+*/
 
 -- Filter Customers into 3 catagories as 'Gold' (> 3000 points), 'Silver' (2000-3000 points) and 'Bronze' (<2000 points)
 
