@@ -1,40 +1,78 @@
--- Creating a Copy of a TABLE
--- In this query, all TABLE values will be copied but not the Column attributes (like Primary key, Auto Increment etc.)
+-- Cloning a table in SQL means making a duplicate copy of an existing table. 
+  It's like making a backup so that we can experiment or work with the data without affecting the original table. 
+  This saves our the time and effort of creating a completely new table and re-entering all the same data. 
+  Cloning can be done with or without data:
+  
+With Data: The clone table includes the structure and rows of the original table.
+Without Data: Only the structure of the original table is copied.
 
-USE sql_store;
-CREATE TABLE old_orders AS
-SELECT * 
-FROM orders
-WHERE order_date < '2018-01-01';
+-- 1. Simple Cloning
+In this method, the clone table creates a copy of the original table’s structure and data, 
+but constraints like primary keys, unique keys, and auto-increment properties are not preserved.
 
-SELECT * FROM old_orders;
+Syntax:
+CREATE TABLE clone_table SELECT * FROM original_table;
 
-# order_id	customer_id	order_date	status	comments	shipped_date	shipper_id
-3	8	2017-12-01	1			
-4	2	2017-01-22	1			
-5	5	2017-08-25	2		2017-08-26	3
-9	10	2017-07-05	2	Nulla mollis molestie lorem. Quisque ut erat.	2017-07-06	1
+Example:
+CREATE TABLE STUDENT_COPY  SELECT * FROM STUDENT;
+SELECT * FROM STUDENT_COPY;
 
 
-TRUNCATE TABLE old_orders; -- It removes all values except the TABLE Structure.
+-- 2. Shallow Cloning
+Shallow cloning is the method in which the clone table gets the same structure as the original table, 
+  but it does not inherits or copy the data from the original table. 
+  In other words, we will have the empty table including indices such as primary key, unique key, and auto_increment. 
+  It also preserves constraints like primary keys and unique keys.
 
-SELECT * FROM old_orders;
+Syntax:
+CREATE TABLE clone_table  LIKE original_table;
 
-# order_id, customer_id, order_date, status, comments, shipped_date, shipper_id
+Example:
+CREATE TABLE STUDENT_SHALLOW_CLONE LIKE STUDENT;
+SELECT * FROM STUDENT_SHALLOW_CLONE;
 
--- No Values in the table, only column names or just the structure of the Table exists.
+-- 3. Deep Cloning
+This method is widely used for creating the clone tables in SQL 
+  as it inherits all the properties of the original table including indices such as primary key, unique, and auto_increment 
+  as well as inherits the existing data from the original table.
 
-INSERT INTO old_orders
-SELECT * 
-FROM orders
-WHERE order_date < '2018-01-01';
+Syntax:
 
-SELECT * FROM old_orders;
+CREATE TABLE clone_table LIKE original_table;
+INSERT INTO clone_table SELECT * FROM original_table;
 
-3	8	2017-12-01	1			
-4	2	2017-01-22	1			
-5	5	2017-08-25	2		2017-08-26	3
-9	10	2017-07-05	2	Nulla mollis molestie lorem. Quisque ut erat.	2017-07-06	1
+Example:
+
+CREATE TABLE STUDENT_DEEP_CLONE LIKE STUDENT;
+INSERT INTO STUDENT_DEEP_CLONE SELECT * FROM STUDENT;
+SELECT * FROM STUDENT_DEEP_CLONE;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
